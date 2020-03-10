@@ -1,0 +1,12 @@
+/*
+ * Mixin for text
+ * @include text(font-weight, font-size, color, text-transform);
+*/
+@mixin text($font-weight:100, $font-size:40px, $color:000, $text-transform:uppercase) {
+  font: {
+    weight: $font-weight;
+    size: $font-size;
+  }
+  color: $color;
+  text-transform: $text-transform;
+}

@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 960px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.flex {
+  display: flex;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}

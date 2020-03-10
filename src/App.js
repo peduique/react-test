@@ -1,24 +1,61 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import SearchForm from './components/SearchForm';
+import List from './components/List';
+import './styles/index.scss';
+import ReactPaginate from 'react-paginate';
+import Loading from './components/Loading';
 
-function App() {
+const App = () => {
+  const [page, setPage] = useState(1);
+  const [info, setInfo] = useState();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProjects = () => {
+      setLoading(true);
+      //TODO: remove
+      let headers = { headers: new Headers({ "Authorization": `Basic ${btoa(`erfertq3:326fsehug`)}` })}
+  
+      fetch(`http://development.archix.com/api/projects?page=${page}`, headers)
+        .then(response => response.json())
+        .then(response => {
+          setInfo(response);
+          setPage(response.page);
+          setLoading(false);
+        });
+    }
+    
+    fetchProjects();
+  }, [page]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      {loading && <Loading />}
+      {info && 
+        <>
+          <SearchForm {...info.form} />
+          <List projects={info.projects} />
+          <div className="control flex align-center space-between">
+            <div>Showing {info.showingStart} to {info.showingEnd} of {info.total} entries</div>
+            {info.projects.length && 
+              <ReactPaginate
+                pageCount={parseInt(info.total) / parseInt(info.itemPerPage)}
+                pageRangeDisplayed={4}
+                previousLabel={'Previous'}
+                nextLabel={'Next'}
+                onPageChange={(data) => setPage(data.selected + 1)}
+                containerClassName={'pagination justify-content-center m-4'}
+                pageLinkClassName={'pagination__button page-number'}
+                breakClassName={'page-number'}
+                previousLinkClassName={'pagination__button'}
+                nextLinkClassName={'pagination__button'}
+                activeLinkClassName={'active'}
+                forcePage={page - 1}
+              />
+            }
+          </div>
+        </>
+      }
     </div>
   );
 }
