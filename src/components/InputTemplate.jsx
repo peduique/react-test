@@ -6,8 +6,12 @@ const InputTemplate = props => {
   console.log(props)
   return (
     <>
-      {(props.type === 'text' || props.type === 'search_team') && <Input {...props} />}
-      {(props.type === 'multi_select' || props.type === 'select') && <Select {...props} />}
+      {(props.type === 'text' || props.type === 'search_team') && 
+        <Input {...props} onChangeInput={props.onChangeInput} />
+      }
+      {(props.type === 'multi_select' || props.type === 'select') && 
+        <Select {...props} />
+      }
     </>
   )
 }

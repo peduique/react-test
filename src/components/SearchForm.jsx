@@ -8,7 +8,11 @@ const SearchForm = props => {
 
       <div className="search-form__wrap">
         {props.inputs.map((input, index) =>
-          <InputTemplate {...input} key={index} />
+          <InputTemplate 
+            {...input}
+            key={index}
+            onChangeInput={props.onChangeInput}
+          />
         )}
       </div>
       
