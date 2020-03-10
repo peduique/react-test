@@ -1,31 +1,66 @@
-.project_seach_form {
+.search-form {
   background: #fff;
   padding: 30px;
   margin: 30px 0;
   box-shadow: 0 2px 2px #ddd;
   border-radius: 5px;
+  &__title {
+    @include text(600, 16px, #7D7D7D, none);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    margin-top: 0;
+    border-bottom: 1px solid #00000050;
+  }
+  &__wrap {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 20px;
+  }
+  &__control {
+    margin-top: 20px;
+  }
 }
 
-.form-title {
-  @include text(600, 16px, #7D7D7D, none);
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-  margin-top: 0;
-  border-bottom: 1px solid #00000050;
+.dropdown {
+  position: absolute;
+  &__btn {
+    background: transparent;
+    border: 0;
+    font-size: 20px;
+    color: #AEAFAE;
+    padding: 0 5px;
+    cursor: pointer;
+    &.active {
+      color: #000;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  &__list {
+    box-shadow: 0 2px 2px #ddd;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #f2f2f2;
+    list-style: none;
+    padding: 0;
+    min-width: 120px;
+    text-align: left;
+    border-radius: 4px;
+    overflow: hidden;
+  }
 }
 
-.btn-dropdown {
-  background: transparent;
-  border: 0;
-  font-size: 20px;
-  color: #AEAFAE;
-  padding: 0 5px;
-}
-
-.wrap-form {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-gap: 20px;
+.menu-item {
+  display: block;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  transition: all .2s;
+  font-size: 14px;
+  &:hover {
+    background: #ddd;
+  }
 }
 
 input, select {
@@ -36,4 +71,18 @@ input, select {
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: 2px;
+  height: 31px;
+  font-size: 14px;
+}
+
+.s_btn {
+  padding: 6px 10px;
+  border-radius: 8px;
+  color: #fff;
+  border: 0;
+  background: #32A5E3;
+  font-size: 14px;
+  ~ .s_btn {
+    margin: 0 5px;
+  }
 }
