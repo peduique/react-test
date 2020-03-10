@@ -6,10 +6,34 @@
   border-radius: 5px;
 }
 
+.form-title {
+  @include text(600, 16px, #7D7D7D, none);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  margin-top: 0;
+  border-bottom: 1px solid #00000050;
+}
+
 .btn-dropdown {
   background: transparent;
   border: 0;
   font-size: 20px;
   color: #AEAFAE;
   padding: 0 5px;
+}
+
+.wrap-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+
+input, select {
+  width: 100%;
+  padding: 8px;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 2px;
 }

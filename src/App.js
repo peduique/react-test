@@ -9,6 +9,7 @@ const App = () => {
   const [page, setPage] = useState(1);
   const [info, setInfo] = useState();
   const [loading, setLoading] = useState(true);
+  const [form, setForm] = useState({});
 
   useEffect(() => {
     const fetchProjects = () => {
@@ -19,12 +20,13 @@ const App = () => {
       fetch(`http://development.archix.com/api/projects?page=${page}`, headers)
         .then(response => response.json())
         .then(response => {
+          setForm(response.form);
           setInfo(response);
           setPage(response.page);
           setLoading(false);
         });
     }
-    
+
     fetchProjects();
   }, [page]);
 
@@ -33,7 +35,7 @@ const App = () => {
       {loading && <Loading />}
       {info && 
         <>
-          <SearchForm {...info.form} />
+          <SearchForm {...form} />
           <List projects={info.projects} />
           <div className="control flex align-center space-between">
             <div>Showing {info.showingStart} to {info.showingEnd} of {info.total} entries</div>
