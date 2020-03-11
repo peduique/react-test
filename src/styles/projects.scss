@@ -49,6 +49,9 @@
 
 .control {
   margin: 30px 0;
+  @include bp(xs) {
+    justify-content: center;
+  }
 }
 
 .pagination {

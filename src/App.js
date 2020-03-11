@@ -7,6 +7,7 @@ import Loading from './components/Loading';
 const App = () => {
   const headers = { headers: new Headers({ "Authorization": `Basic ${btoa(`erfertq3:326fsehug`)}` })}
 
+  const ref = React.createRef();
   const [page, setPage] = useState(1);
   const [info, setInfo] = useState();
   const [loading, setLoading] = useState(true);
@@ -36,6 +37,14 @@ const App = () => {
     fetchProjects();
   }
 
+  const handleChangePage = data => {
+    setPage(data.selected + 1);
+    ref.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }
+
   return (
     <div className="container">
       {loading && <Loading />}
@@ -47,7 +56,7 @@ const App = () => {
             onSubmitForm={handleSubmitForm}
           />
           {info.projects ? (
-            <>
+            <div ref={ref}>
               <ul className="view-template">
                 <li>
                   <button className={`view-template__button active`}>
@@ -62,10 +71,10 @@ const App = () => {
               </ul>
               
               <List 
-                info={info} 
-                onPageChange={(data) => setPage(data.selected + 1)}
+                info={info}
+                onPageChange={handleChangePage}
               />
-            </>
+            </div>
           ) : (
             'No results found'
           )

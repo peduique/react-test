@@ -19,6 +19,26 @@
   &__control {
     margin-top: 20px;
   }
+  &__btn-mobile {
+    display: none;
+    @include bp(xs) {
+      display: block;
+      position: fixed;
+      top: 50%;
+      left: -21px;
+      transform: translateY(-50%);
+      transform: rotate(90deg);
+      background: #EFEFEF;
+      z-index: 1234;
+      padding: 8px 15px;
+      font-size: 13px;
+      border: 1px solid #fff;
+      border-radius: 10px 10px 0 0;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
 }
 
 .dropdown {

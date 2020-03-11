@@ -2,8 +2,18 @@ import React from 'react';
 import InputTemplate from './InputTemplate';
 
 const SearchForm = props => {
+  const ref = React.createRef();
+  const handleClickSearchForm = () => {
+    ref.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }
+
   return (
-    <form className={`search-form ${props.class}`} id={props.id}>
+    <form className={`search-form ${props.class}`} id={props.id} ref={ref}>
+      <button className="search-form__btn-mobile" type="button" onClick={handleClickSearchForm}>Search</button>
+
       <h2 className="search-form__title">{props.title}</h2>
 
       <div className="search-form__wrap">
