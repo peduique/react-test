@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import SearchForm from './components/SearchForm';
 import List from './components/List';
 import './styles/index.scss';
-import ReactPaginate from 'react-paginate';
 import Loading from './components/Loading';
 
 const App = () => {
@@ -49,26 +48,23 @@ const App = () => {
           />
           {info.projects ? (
             <>
-              <List projects={info.projects} />
-              <div className="control flex align-center space-between wrap">
-                <div>Showing {info.showingStart} to {info.showingEnd} of {info.total} entries</div>
-                {info.projects.length && 
-                  <ReactPaginate
-                    pageCount={parseInt(info.total) / parseInt(info.itemPerPage)}
-                    pageRangeDisplayed={4}
-                    previousLabel={'Previous'}
-                    nextLabel={'Next'}
-                    onPageChange={(data) => setPage(data.selected + 1)}
-                    containerClassName={'pagination justify-content-center m-4'}
-                    pageLinkClassName={'pagination__button page-number'}
-                    breakClassName={'page-number'}
-                    previousLinkClassName={'pagination__button'}
-                    nextLinkClassName={'pagination__button'}
-                    activeLinkClassName={'active'}
-                    forcePage={page - 1}
-                  />
-                }
-              </div>
+              <ul className="view-template">
+                <li>
+                  <button className={`view-template__button active`}>
+                    <i className="icon-th-large"></i>
+                  </button>
+                </li>
+                <li>
+                  <button className={`view-template__button`}>
+                    <i className="icon-view_column"></i>
+                  </button>
+                </li>
+              </ul>
+              
+              <List 
+                info={info} 
+                onPageChange={(data) => setPage(data.selected + 1)}
+              />
             </>
           ) : (
             'No results found'
