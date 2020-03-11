@@ -21,7 +21,9 @@ const SearchForm = props => {
           <button 
             key={index}
             className={button.class}
-            id={button.id}>
+            id={button.id}
+            onClick={props.onSubmitForm}
+          >
               {button.text}
           </button>
         )}

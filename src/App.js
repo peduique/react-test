@@ -6,37 +6,35 @@ import ReactPaginate from 'react-paginate';
 import Loading from './components/Loading';
 
 const App = () => {
+  const headers = { headers: new Headers({ "Authorization": `Basic ${btoa(`erfertq3:326fsehug`)}` })}
+
   const [page, setPage] = useState(1);
   const [info, setInfo] = useState();
   const [loading, setLoading] = useState(true);
   const [address, setAddress] = useState('');
+  const [searchAddress, setSearchAddress] = useState('');
+
+  const fetchProjects = (type) => {
+    setLoading(true);
+    fetch(`http://development.archix.com/api/projects?page=${page}&address=${address}`, headers)
+      .then(response => response.json())
+      .then(response => setInfo(response))
+      .then(response => setLoading(false))
+  }
 
   useEffect(() => {
-    const fetchProjects = () => {
-      setLoading(true);
-      //TODO: remove
-      let headers = { headers: new Headers({ "Authorization": `Basic ${btoa(`erfertq3:326fsehug`)}` })}
-  
-      fetch(`http://development.archix.com/api/projects?page=${page}&address=${address}`, headers)
-        .then(response => response.json())
-        .then(response => {
-          setInfo(response);
-          setPage(response.page);
-          setLoading(false);
-        });
-    }
-
     fetchProjects();
-  }, [page, address]);
-
-  useEffect(() => {
-    setPage(1);
-  }, [address])
+  }, [page]);
 
   const handleInput = ev => {
-    if (ev.target.name === 'address') {
-      setAddress(ev.target.value);
-    }
+    if (ev.target.name === 'address') setSearchAddress(ev.target.value);
+  }
+
+  const handleSubmitForm = ev => {
+    ev.preventDefault();
+    setPage(1);
+    setAddress(searchAddress);
+    fetchProjects();
   }
 
   return (
@@ -47,6 +45,7 @@ const App = () => {
           <SearchForm 
             {...info.form} 
             onChangeInput={handleInput}
+            onSubmitForm={handleSubmitForm}
           />
           {info.projects ? (
             <>

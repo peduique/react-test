@@ -3,7 +3,6 @@ import Input from './Input';
 import Select from './Select';
 
 const InputTemplate = props => {
-  console.log(props)
   return (
     <>
       {(props.type === 'text' || props.type === 'search_team') && 
